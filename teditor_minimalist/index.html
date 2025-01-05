@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist Text Editor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="editor-container">
+    <div class="toolbar">
+      <button onclick="formatText('bold')"><b>B</b></button>
+      <button onclick="formatText('italic')"><i>I</i></button>
+      <button onclick="formatText('underline')"><u>U</u></button>
+      <button onclick="formatText('justifyLeft')">&#x25C4;</button>
+      <button onclick="formatText('justifyCenter')">&#x2630;</button>
+      <button onclick="formatText('justifyRight')">&#x25BA;</button>
+    </div>
+    <div id="editor" contenteditable="true" class="text-area">
+      Start typing here...
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
