@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Minimalist Text Editor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f9f9f9;
+    }
+
+    .editor-container {
+      width: 80%;
+      margin-top: 20px;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      background: #eee;
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .toolbar button, 
+    .toolbar select, 
+    .toolbar input {
+      background: none;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .toolbar button:hover, 
+    .toolbar select:hover, 
+    .toolbar input:hover {
+      background: #ddd;
+    }
+
+    .editor {
+      min-height: 300px;
+      padding: 15px;
+      font-size: 16px;
+      line-height: 1.6;
+      border: none;
+      outline: none;
+      resize: vertical;
+      overflow-y: auto;
+    }
+
+    .editor:focus {
+      border: 1px solid #ccc;
+    }
+
+    .fullscreen {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="editor-container" id="editor-container">
+    <div class="toolbar">
+      <!-- Font Family -->
+      <select onchange="formatText('fontName', this.value)">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier New">Courier New</option>
+      </select>
+
+      <!-- Font Size -->
+      <select onchange="formatText('fontSize', this.value)">
+        <option value="1">Small</option>
+        <option value="3" selected>Normal</option>
+        <option value="5">Large</option>
+        <option value="7">Extra Large</option>
+      </select>
+
+      <!-- Formatting Buttons -->
+      <button onclick="formatText('bold')"><b>B</b></button>
+      <button onclick="formatText('italic')"><i>I</i></button>
+      <button onclick="formatText('underline')"><u>U</u></button>
+      <input type="color" onchange="formatText('foreColor', this.value)" title="Text Color">
+      <input type="color" onchange="formatText('backColor', this.value)" title="Background Color">
+
+      <!-- Undo/Redo -->
+      <button onclick="document.execCommand('undo')">↺</button>
+      <button onclick="document.execCommand('redo')">↻</button>
+
+      <!-- Save/Load -->
+      <button onclick="saveContent()">💾 Save</button>
+      <button onclick="loadContent()">📂 Load</button>
+
+      <!-- Clear Formatting -->
+      <button onclick="clearFormatting()">✖️ Clear</button>
+
+      <!-- Fullscreen -->
+      <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    </div>
+    <div class="editor" contenteditable="true" id="editor"></div>
+  </div>
+
+  <script>
+    // Format Text
+    function formatText(command, value = null) {
+      document.execCommand(command, false, value);
+    }
+
+    // Clear Formatting
+    function clearFormatting() {
+      document.execCommand('removeFormat');
+    }
+
+    // Save Content to Local Storage
+    function saveContent() {
+      const content = document.getElementById('editor').innerHTML;
+      localStorage.setItem('textEditorContent', content);
+      alert('Content saved!');
+    }
+
+    // Load Content from Local Storage
+    function loadContent() {
+      const content = localStorage.getItem('textEditorContent');
+      if (content) {
+        document.getElementById('editor').innerHTML = content;
+      } else {
+        alert('No saved content found.');
+      }
+    }
+
+    // Toggle Fullscreen Mode
+    function toggleFullscreen() {
+      const editorContainer = document.getElementById('editor-container');
+      editorContainer.classList.toggle('fullscreen');
+    }
+  </script>
+</body>
+</html>

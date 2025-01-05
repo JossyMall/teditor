@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist Text Editor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f9f9f9;
+    }
+
+    .editor-container {
+      width: 80%;
+      margin-top: 20px;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .toolbar {
+      display: flex;
+      background: #eee;
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .toolbar button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      padding: 8px;
+      margin: 0 5px;
+      cursor: pointer;
+      color: #555;
+      outline: none;
+    }
+
+    .toolbar button:hover {
+      background: #ddd;
+    }
+
+    .editor {
+      min-height: 300px;
+      padding: 15px;
+      font-size: 16px;
+      line-height: 1.6;
+      border: none;
+      outline: none;
+      resize: vertical;
+      overflow-y: auto;
+    }
+
+    .editor:focus {
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="editor-container">
+    <div class="toolbar">
+      <button onclick="formatText('bold')"><b>B</b></button>
+      <button onclick="formatText('italic')"><i>I</i></button>
+      <button onclick="formatText('underline')"><u>U</u></button>
+      <button onclick="formatText('foreColor', prompt('Enter a color:'))">🎨</button>
+      <button onclick="formatText('backColor', prompt('Enter a background color:'))">🖌️</button>
+      <button onclick="document.execCommand('undo')">↺</button>
+      <button onclick="document.execCommand('redo')">↻</button>
+      <button onclick="clearFormatting()">✖️</button>
+    </div>
+    <div class="editor" contenteditable="true"></div>
+  </div>
+
+  <script>
+    function formatText(command, value = null) {
+      document.execCommand(command, false, value);
+    }
+
+    function clearFormatting() {
+      document.execCommand('removeFormat');
+    }
+  </script>
+</body>
+</html>
