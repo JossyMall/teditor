@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist Text Editor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="editor-container">
+    <div class="toolbar">
+      <button onclick="formatText('bold')"><b>B</b></button>
+      <button onclick="formatText('italic')"><i>I</i></button>
+      <button onclick="formatText('underline')"><u>U</u></button>
+      <button onclick="formatText('strikeThrough')"><s>S</s></button>
+      <!-- Updated Alignment Buttons with SVG Icons -->
+      <button onclick="formatText('justifyLeft')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="15" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        Left
+      </button>
+      <button onclick="formatText('justifyCenter')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="9" y1="12" x2="15" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        Center
+      </button>
+      <button onclick="formatText('justifyRight')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="9" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        Right
+      </button>
+      <button onclick="formatText('insertUnorderedList')">&#x2022;</button>
+      <button onclick="formatText('insertOrderedList')">1.</button>
+      <input type="color" id="textColor" onchange="applyColor('foreColor', this.value)">
+      <input type="color" id="highlightColor" onchange="applyColor('hiliteColor', this.value)">
+      <select id="fontFamily" onchange="applyFontFamily(this.value)">
+        <option value="Arial">Arial</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Verdana">Verdana</option>
+      </select>
+      <select id="fontSize" onchange="applyFontSize(this.value)">
+        <option value="1">Small</option>
+        <option value="3">Normal</option>
+        <option value="5">Large</option>
+        <option value="7">Huge</option>
+      </select>
+      <button onclick="formatText('undo')">&#x21B6;</button>
+      <button onclick="formatText('redo')">&#x21B7;</button>
+    </div>
+    <div id="editor" contenteditable="true" class="text-area">
+      Start typing here...
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
